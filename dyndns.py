@@ -23,6 +23,29 @@ def getMyIp():
     # }
     r = requests.post('https://porkbun.com/api/json/v3/ping', data={'secretapikey': secretKey, 'apikey': apiKey})
 
+def raiseTheAlarm():
+    print("aaaaaaaaa")
+    #todo - make this actually work
+
+def is_valid_ipv4_address(ip_address):
+    parts = ip_address.split('.')
+    
+    if len(parts) != 4:
+        return False
+
+    for part in parts:
+        if not part.isdigit():
+            return False
+
+        value = int(part)
+        if value < 0 or value > 255:
+            return False
+
+    return True
+
 while (True): 
     currentIp = getMyIp()
-    
+    if (not (is_valid_ipv4_address(currentIp))):
+        panic()
+    else
+        # so we got back a valid ip, lets check if the dns records need updating
